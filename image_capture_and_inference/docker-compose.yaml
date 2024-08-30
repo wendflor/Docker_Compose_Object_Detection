@@ -1,0 +1,46 @@
+services:
+  camera:
+    build:
+      context: ./docker-image-capture
+      dockerfile: Dockerfile
+    volumes:
+      - shared:/shared
+      - ./docker-image-capture:/app
+    runtime: nvidia
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  inference:
+    build:
+      context: ./docker-inference
+      dockerfile: Dockerfile
+    volumes:
+      - shared:/shared
+      - ./docker-inference:/app
+    runtime: nvidia
+    depends_on:
+      - camera
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  shared:
+    driver: local
+    driver_opts:
+      type: 'none'
+      device: '${PWD}/shared'
+      o: 'bind'
+
+

@@ -1,0 +1,8 @@
+train: # If training must be performend, copy path/to/data here
+val: # If validation must be performend, copy path/to/data here
+test: # If testing must be performend, copy path/to/data here
+nc: 2
+names: [ 'red_truck_cab' , 'blue_truck_cab']
+colors:
+  red_truck_cab: [0, 0, 255]  # Red in BGR
+  blue_truck_cab: [255, 0, 0]  # Blue in BGR

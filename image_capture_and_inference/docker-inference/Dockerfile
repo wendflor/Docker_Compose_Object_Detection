@@ -1,0 +1,26 @@
+FROM dustynv/l4t-pytorch:r36.2.0
+
+# Create the app directory
+RUN mkdir /app
+
+# Set the working directory
+WORKDIR /app
+
+# Upgrade pip
+RUN pip3 install --upgrade pip
+
+# Copy the requirements file into the app directory
+COPY requirements.txt /app
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Copy your application code
+COPY . /app
+
+# Set working directory
+WORKDIR /app
+
+# Run your application
+CMD ["python3", "YOLOv8-seg-inference.py"]
+

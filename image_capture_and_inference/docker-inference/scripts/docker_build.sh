@@ -1,0 +1,1 @@
+docker build -t yolov8-seg-inference:latest -f Dockerfile_jetson .

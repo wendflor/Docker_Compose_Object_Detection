@@ -1,0 +1,1 @@
+docker build -t zed_image_capture:latest -f Dockerfile .
